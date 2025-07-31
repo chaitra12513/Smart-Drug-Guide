@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Consultation</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: blanchedalmond;
+        }
+        .doctor-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    width: 280px;
+    margin: 20px;
+    display: inline-block;
+}
+
+.doctor-card:hover {
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+
+.doctor-name {
+    font-size: 22px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.specialization {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.experience,
+.contact,
+.location {
+    font-size: 14px;
+    color: #666;
+}
+
+.book-appointment {
+    background: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.book-appointment:hover {
+    background: #0056b3;
+}
+          .logo {
+            width: 50px;
+            height: 50px;
+            color: black;
+            margin-top: 0;
+            margin-left: 2px;
+        }
+
+        .myimg {
+            width: 50px;
+            height: 50px;
+            border: 2px solid black;
+            border-radius: 25px;
+        }
+
+    </style>
+
+
+
+  </head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <!-- Logo at the top-left corner -->
+            <div class="logo">
+                <img class="myimg" src="{{ url_for('static', filename='heal.jpg') }}" alt="">
+            </div>
+
+            <a class="navbar-brand" href="#">SMART DRUG GUIDE</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Available Doctors</h2>
+
+    <div class="row">
+        {% for doctor in doctors %}
+        <div class="col-md-4">
+            <div class="doctor-card">
+                <h4 class="text-primary" class="doctor-name">{{ doctor.name }}</h4>
+                <p class="specialization"><strong>Specialization:</strong> {{ doctor.specialization }}</p>
+                <p class="experience"><strong>Experience:</strong> {{ doctor.experience }} years</p>
+                <p class="contact"><strong>Contact:</strong> {{ doctor.contact }}</p>
+                <p class="location"><strong>Location:</strong> {{ doctor.location }}</p>
+                <p ><strong><a href="https://www.maxhealthcare.in/hospital-network/max-super-speciality-hospital-saket" target="_blank" rel="noopener"> Max Super Speciality Hospital </a></strong></p>
+                <button class="book-appointment" onclick="bookAppointment('{{doctor.id }}')">Book Appointment</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function bookAppointment(doctorId) {
+        window.location.href = "/book_appointment/" + doctorId;
+    }
+</script>
+
+</body>
+</html>
+
